@@ -77,8 +77,8 @@ public class OperatingSystemDetector {
         // 设置IP地址
         request.setIp(getLocalIp().orElse(""));
         request.setPort(env.getProperty("server.port"));
-        request.setCustomer(env.getProperty("ruoyi.customer"));
-        request.setProject(env.getProperty("ruoyi.project"));
+        request.setCustomer(env.getProperty("start-verify.customer"));
+        request.setProject(env.getProperty("start-verify.project"));
 
         return request;
     }
