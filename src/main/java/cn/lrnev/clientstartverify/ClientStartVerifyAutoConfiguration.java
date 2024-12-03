@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2024/12/2 11:26
  **/
 @Configuration
-@ConditionalOnProperty(name = "client.start.verify.enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(name = "start-verify.enabled", havingValue = "true", matchIfMissing = true)
 public class ClientStartVerifyAutoConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(ClientStartVerifyAutoConfiguration.class);
