@@ -1,26 +1,35 @@
 package cn.lrnev.clientstartverify;
 
+import cn.lrnev.clientstartverify.verify.DefaultStartVerifier;
 import cn.lrnev.clientstartverify.verify.StartVerifier;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author 鲁子狄
  * @since 2024/12/2 11:26
  **/
 @Slf4j
-@Configuration
+@AutoConfiguration
 @RequiredArgsConstructor
 @ConditionalOnProperty(name = "start-verify.enabled", havingValue = "true", matchIfMissing = true)
 public class ClientStartVerifyAutoConfiguration {
 
     private final StartVerifier startVerifier;
+
+
+    @PostConstruct
+    public void init() {
+        log.info("ClientStartVerifyAutoConfiguration is being initialized.");
+    }
 
     @Bean
     public CommandLineRunner clientStartVerifyRunner(ConfigurableApplicationContext context) {
@@ -34,5 +43,11 @@ public class ClientStartVerifyAutoConfiguration {
                 SpringApplication.exit(context, () -> 1);
             }
         };
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(StartVerifier.class)
+    public StartVerifier startVerifier(ConfigurableApplicationContext context) {
+        return new DefaultStartVerifier(context);
     }
 }

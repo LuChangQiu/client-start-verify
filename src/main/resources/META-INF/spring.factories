@@ -1,5 +1,0 @@
-# src/main/resources/META-INF/spring.factories
-
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.lrnev.clientstartverify.ClientStartVerifyAutoConfiguration,\
-cn.lrnev.clientstartverify.conf.StartVerifierConfiguration
