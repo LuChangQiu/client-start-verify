@@ -1,8 +1,8 @@
 package cn.lrnev.clientstartverify;
 
 import cn.lrnev.clientstartverify.verify.StartVerifier;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -16,14 +16,11 @@ import org.springframework.context.annotation.Configuration;
  **/
 @Slf4j
 @Configuration
+@RequiredArgsConstructor
 @ConditionalOnProperty(name = "start-verify.enabled", havingValue = "true", matchIfMissing = true)
 public class ClientStartVerifyAutoConfiguration {
 
     private final StartVerifier startVerifier;
-
-    public ClientStartVerifyAutoConfiguration(StartVerifier startVerifier) {
-        this.startVerifier = startVerifier;
-    }
 
     @Bean
     public CommandLineRunner clientStartVerifyRunner(ConfigurableApplicationContext context) {
